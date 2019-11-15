@@ -4,9 +4,7 @@
 #export GOOGLE_APPLICATION_CREDENTIALS="CREDENTIALS.json FILE"
 
 #once you are done running the above, the format for running the file is as follows:
-#python call_api.py content, project_id, model_id
-#for us, it will be the below:
-#python call_api.py IMAGE_FILE_PATH 946558125160 ICN6835430693418303488
+#python call_api.py content
 
 import os
 import sys
@@ -15,22 +13,26 @@ from google.cloud.automl_v1beta1.proto import service_pb2
 
 os.system('clear') #clears the console before running the below
 
-# 'content' is base-64-encoded image data.
-def get_prediction(content, project_id, model_id):
+
+# 'content' is the image of the watch you are trying to analyze and get labels out of 
+def get_prediction(content):
+
+  project_id = '946558125160'
+  model_id = 'ICN6835430693418303488'
+
   prediction_client = automl.PredictionServiceClient()
 
   name = 'projects/{}/locations/us-central1/models/{}'.format(project_id, model_id)
   payload = {'image': {'image_bytes': content }}
   params = {}
-  request = prediction_client.predict(name, payload, params)
+  request = prediction_client.predict(name, payload, params) #the actual label info that will be returned
   return request  # waits till request is returned
 
 if __name__ == '__main__':
   file_path = sys.argv[1]
-  project_id = sys.argv[2]
-  model_id = sys.argv[3]
 
-  with open(file_path, 'rb') as ff:
+  with open(file_path, 'rb') as ff: #grab the image
     content = ff.read()
 
-  print(get_prediction(content, project_id, model_id))
+print("______________________Classification of image: ", file_path, "______________________")
+print(get_prediction(content)) #get the info from the image
