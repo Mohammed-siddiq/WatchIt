@@ -9,7 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Service layer
+ *
+ * @author mohammedsiddiq
+ */
 
 @Service
 public class WatchService {
@@ -45,4 +52,26 @@ public class WatchService {
 
 
     }
+
+
+    /**
+     * Finds similar watches from the catalog in db
+     *
+     * @param similarTo The watch similar to which recommendations are made
+     * @return {@link List<WatchDto>} that are similar
+     */
+    public List<WatchDto> findSimilarWatches(WatchDto similarTo) {
+
+        logger.info("Finding similar watches to {} ", similarTo);
+
+        List<Watch> allWatches = new ArrayList<>();
+
+        allWatches.addAll(watchRepository.findAllByCaseShapeOrCaseBackOrDialIndexesOrDialColorOrMovementTime(similarTo.getCaseShape(), similarTo.getCaseBack(), similarTo.getDialIndexes(), similarTo.getDialColor(), similarTo.getMovementTime()));
+
+        return WatchMapper.INSTANCE.watchToDTOs(allWatches);
+
+
+    }
+
+
 }
