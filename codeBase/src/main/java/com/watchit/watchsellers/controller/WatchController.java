@@ -11,16 +11,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/watch")
 public class WatchController {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     WatchRepository watchRepository;
     @Autowired
     WatchService service;
 
-    Logger logger = LoggerFactory.getLogger(WatchController.class);
 
     @PostMapping
     ResponseEntity<Object> addWatches(@RequestBody WatchDto watchDto) {
@@ -32,13 +34,24 @@ public class WatchController {
         } catch (Exception ex) {
             return exceptionHandler(ex);
         }
-
     }
 
     @GetMapping
     ResponseEntity<Object> getWatches() {
         try {
             return new ResponseEntity<>(service.getAllWatches(), HttpStatus.OK);
+        } catch (Exception ex) {
+            return exceptionHandler(ex);
+        }
+    }
+
+
+    @PostMapping
+    @RequestMapping("/similarWatches")
+    ResponseEntity<Object> getSimilarWatches(@RequestBody WatchDto watchDto) {
+
+        try {
+            return new ResponseEntity<>(service.findSimilarWatches(watchDto), HttpStatus.OK);
         } catch (Exception ex) {
             return exceptionHandler(ex);
         }
