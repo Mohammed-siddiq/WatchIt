@@ -12,18 +12,25 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.watchit.watchsellers.configs.Constants;
+import com.watchit.watchsellers.dtos.WatchDto;
 import net.sourceforge.argparse4j.ArgumentParsers;
 import net.sourceforge.argparse4j.inf.ArgumentParser;
 import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
-public class PredictionApi {
+public class PredictionService {
 
+
+    @Autowired
+    WatchService watchService;
 
     /**
      * Demonstrates using the AutoML client to predict an image.
@@ -93,5 +100,59 @@ public class PredictionApi {
         }
 
 
+    }
+
+
+    public List<WatchDto> similarWatches(PredictResponse predictedResponse) {
+
+        WatchDto predictedWatch = extractPredictedDetails(predictedResponse);
+
+
+        return watchService.findSimilarWatches(predictedWatch);
+
+    }
+
+    /**
+     * Constructs the watch object from the predicted response
+     *
+     * @param predictedResponse The response from AUTOML
+     * @return {@link WatchDto}
+     */
+    private WatchDto extractPredictedDetails(PredictResponse predictedResponse) {
+
+        WatchDto watchDto = new WatchDto();
+
+        //findAllByCaseShapeOrCaseBackOrDialIndexesOrDialColorOrMovementTime
+
+
+        watchDto.setCaseShape(predictedResponse.getPayload(7).getDisplayName());
+
+        watchDto.setDialColor(predictedResponse.getPayload(10).getDisplayName());
+
+        watchDto.setDialIndexes(predictedResponse.getPayload(5).getDisplayName());
+
+        watchDto.setMovementTime(predictedResponse.getPayload(4).getDisplayName());
+
+        watchDto.setMovementDisplay(predictedResponse.getPayload(0).getDisplayName());
+
+        watchDto.setMovementType(predictedResponse.getPayload(7).getDisplayName());
+
+
+//        for (AnnotationPayload annotationPayload : predictedResponse.getPayloadList()) {
+//
+//            switch (annotationPayload.getDisplayName().split("-")[0].trim()) {
+//
+//                case Constants.CASE_BACK_ANNOTATION:
+//                    watchDto.setCaseBack(annotationPayload.getDisplayName());
+//                    break;
+//                case Constants.CASE_MATERIAL_ANNOTATION:
+//                    watchDto.setCaseMaterial(annotationPayload.getDisplayName());
+//                    break;
+//                case Constants.CASE_SHAPE_ANNOTATION:
+//            }
+//
+//
+//        }
+        return watchDto;
     }
 }

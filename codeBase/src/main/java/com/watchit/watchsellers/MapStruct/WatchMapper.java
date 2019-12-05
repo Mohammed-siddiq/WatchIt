@@ -7,6 +7,11 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
+/**
+ * Mapping Dtos to entity objects
+ *
+ * @author mohammedsiddiq
+ */
 @Mapper
 public interface WatchMapper {
 
@@ -17,5 +22,7 @@ public interface WatchMapper {
     Watch watchDtoToWatch(WatchDto watch);
 
     List<WatchDto> watchToDTOs(List<Watch> watches);
+
+
 
 }

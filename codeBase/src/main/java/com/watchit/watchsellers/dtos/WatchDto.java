@@ -32,6 +32,10 @@ public class WatchDto {
 
     private String movementTime;
 
+    private String movementType;
+
+    private String movementDisplay;
+
     private String description;
 
     private String imageLink;
