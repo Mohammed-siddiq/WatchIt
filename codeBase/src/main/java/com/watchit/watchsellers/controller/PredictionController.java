@@ -2,9 +2,8 @@ package com.watchit.watchsellers.controller;
 
 
 import com.google.cloud.automl.v1beta1.PredictResponse;
-import com.watchit.watchsellers.dtos.UploadFileResponse;
 import com.watchit.watchsellers.servicelayer.FileStorageService;
-import com.watchit.watchsellers.servicelayer.PredictionApi;
+import com.watchit.watchsellers.servicelayer.PredictionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,9 @@ public class FileController {
     private FileStorageService fileStorageService;
 
     @Autowired
-    private PredictionApi predictionApi;
+    private PredictionService predictionService;
 
-    @PostMapping("/uploadFile")
+    @PostMapping("/findSimilar")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
 
 
@@ -44,10 +43,12 @@ public class FileController {
                 .path(fileName)
                 .toUriString();
 
-        String predictResponse = predictionApi.predict("pro-century-260801", "us-central1", "ICN5846081334652436480", "uploads/" + fileName, "0.3");
+        PredictResponse predictResponse = predictionService.predict("pro-century-260801", "us-central1", "ICN5846081334652436480", "uploads/" + fileName, "0.3");
 
 
-        return predictResponse;
+        predictionService.similarWatches(predictResponse);
+
+        return predictResponse.toString();
 
 //        return new UploadFileResponse(fileName, fileDownloadUri,
 //                file.getContentType(), file.getSize());
