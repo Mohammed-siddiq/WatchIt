@@ -139,26 +139,6 @@ public class PredictionService {
 
         watchDto.setCaseMaterial(predictedResponse.getPayload(6).getDisplayName().split("-")[1].trim());
 
-//        watchDto.(predictedResponse.getPayload(0).getDisplayName());
-//
-//        watchDto.setMovementType(predictedResponse.getPayload(7).getDisplayName());
-
-
-//        for (AnnotationPayload annotationPayload : predictedResponse.getPayloadList()) {
-//
-//            switch (annotationPayload.getDisplayName().split("-")[0].trim()) {
-//
-//                case Constants.CASE_BACK_ANNOTATION:
-//                    watchDto.setCaseBack(annotationPayload.getDisplayName());
-//                    break;
-//                case Constants.CASE_MATERIAL_ANNOTATION:
-//                    watchDto.setCaseMaterial(annotationPayload.getDisplayName());
-//                    break;
-//                case Constants.CASE_SHAPE_ANNOTATION:
-//            }
-//
-//
-//        }
         return watchDto;
     }
 }
