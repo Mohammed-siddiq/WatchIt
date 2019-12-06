@@ -30,11 +30,15 @@ public class Watch {
 
     private String dialColor;
 
+    private String dialHands;
+
     private String movementTime;
 
     private String description;
 
     private String imageLink;
+
+    private String imagePath;
 
 
 }

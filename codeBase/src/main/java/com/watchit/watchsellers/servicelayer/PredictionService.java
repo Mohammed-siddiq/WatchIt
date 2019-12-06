@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.watchit.watchsellers.configs.ConfigReader;
 import com.watchit.watchsellers.configs.Constants;
 import com.watchit.watchsellers.dtos.WatchDto;
 import net.sourceforge.argparse4j.ArgumentParsers;
@@ -53,7 +54,7 @@ public class PredictionService {
         GoogleCredentials credentials = null;
         PredictionServiceSettings predictionServiceSettings = null;
         try {
-            credentials = GoogleCredentials.fromStream(new FileInputStream("pro-century-260801-73a7b8bf0177.json"))
+            credentials = GoogleCredentials.fromStream(new FileInputStream(ConfigReader.CREDENTIAL_PATH))
                     .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
 
 
@@ -87,8 +88,9 @@ public class PredictionService {
 
 
             System.out.println("Prediction results:");
+            int i = 0;
             for (AnnotationPayload annotationPayload : response.getPayloadList()) {
-                System.out.println("Predicted class name :" + annotationPayload.getDisplayName());
+                System.out.println("Predicted class name : " + i++ + " : " + annotationPayload.getDisplayName());
                 System.out.println(
                         "Predicted class score :" + annotationPayload.getClassification().getScore());
             }
@@ -125,17 +127,21 @@ public class PredictionService {
         //findAllByCaseShapeOrCaseBackOrDialIndexesOrDialColorOrMovementTime
 
 
-        watchDto.setCaseShape(predictedResponse.getPayload(7).getDisplayName());
+        watchDto.setCaseShape(predictedResponse.getPayload(3).getDisplayName());
 
-        watchDto.setDialColor(predictedResponse.getPayload(10).getDisplayName());
+        watchDto.setDialColor(predictedResponse.getPayload(11).getDisplayName().split("-")[1].trim());
 
         watchDto.setDialIndexes(predictedResponse.getPayload(5).getDisplayName());
 
+        watchDto.setDialHands(predictedResponse.getPayload(6).getDisplayName().split("-")[1].trim());
+
         watchDto.setMovementTime(predictedResponse.getPayload(4).getDisplayName());
 
-        watchDto.setMovementDisplay(predictedResponse.getPayload(0).getDisplayName());
+        watchDto.setCaseMaterial(predictedResponse.getPayload(6).getDisplayName().split("-")[1].trim());
 
-        watchDto.setMovementType(predictedResponse.getPayload(7).getDisplayName());
+//        watchDto.(predictedResponse.getPayload(0).getDisplayName());
+//
+//        watchDto.setMovementType(predictedResponse.getPayload(7).getDisplayName());
 
 
 //        for (AnnotationPayload annotationPayload : predictedResponse.getPayloadList()) {
