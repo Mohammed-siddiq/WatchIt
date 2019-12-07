@@ -8,7 +8,7 @@ An Ecommerce platform for watches where your watch selection is driven by image 
 ## WEB SCRAPER
 
 - The scraper was written in python which scrapes the watchbase
-website (www.watchbase.com) for watch details and their
+website for watch details and their
 images.
 - The scraper checkpointed the data as and when required to the
 local machine (through pickle files) to avoid re-requests to
