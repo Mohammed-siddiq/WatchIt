@@ -38,7 +38,7 @@ on the backend system can be easily done. Like for example changing the db from 
 - Scans image, to track the wrist 
 - On the wrist places the  3d models of the watches, where user can select different models of the watches and try them on their wrist.
 
-## FRONTED
+## FRONTEND
 - Web app written in html/css and javascript.
 - Allows the user to upload a watch image and displays the results of similar watches 
 - Interacts with the backend and responds to user requests.
