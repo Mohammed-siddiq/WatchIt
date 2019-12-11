@@ -199,8 +199,7 @@
             formData.append("file", document.getElementById("fileid").files[0]);
 
             var xhr1 = new XMLHttpRequest();
-            <!--xhr1.open("POST"," http://demo5175479.mockable.io/watch/similar");-->
-            xhr1.open("POST"," http://10.9.214.222:8080/Predict/findSimilar");
+            xhr1.open("POST"," http://demo5175479.mockable.io/watch/similar");
 
             console.log("Request : "+ xhr1);
             xhr1.send(formData);
@@ -303,20 +302,20 @@
       </div>
     </section><!-- #about -->
 
-<!--    &lt;!&ndash;==========================
+    <!--==========================
       Call To Action Section
-    ============================&ndash;&gt;
+    ============================-->
     <section id="call-to-action" class="wow fadeIn">
       <div class="container text-center">
         <h3>Watch Search</h3>
-        &lt;!&ndash;<p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-&ndash;&gt;     <div class="form-group col-md-6">
+        <!--<p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+-->     <div class="form-group col-md-6">
         <input type="text" name="email" class="form-control" id="email" placeholder="Enter watch name" data-rule="email" data-msg="Please enter at least 4 chars" />
         <div class="validation"></div>
         </div>
         <a class="cta-btn" href="#">Search</a>
       </div>
-    </section>-->
+    </section>
 
 
 
