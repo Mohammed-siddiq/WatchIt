@@ -66,7 +66,6 @@ function createWatchItem(watchItem) {
         `<h6>` + watchItem['name'] + `</h6>`,
         `<p class="price">$$.$$</p>`,
         // `<p>` + watchItem['description'] + `</p>`,
-        `<p><button> Try it on your hand right now!</button></p>`,
         `</div>`
     ].join("\n");
 

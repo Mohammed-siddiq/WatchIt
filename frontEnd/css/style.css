@@ -1635,3 +1635,34 @@ body.mobile-nav-active #mobile-nav-toggle {
     display: inline;
   }
 }
+
+
+.floating-div
+{
+  position: fixed;
+  bottom: 0;
+    right: 0;
+    padding: 10px;
+}
+.floating-button
+{
+  font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 28px;
+    border-radius: 25px;
+    transition: 0.5s;
+    margin-top: 10px;
+    border: 2px solid #fff;
+    color: #fff;
+    background: #18d26e;
+    cursor: pointer;
+    text-decoration: none !important; 
+}
+.floating-button:hover
+{
+  background: #0e532e;
+}
