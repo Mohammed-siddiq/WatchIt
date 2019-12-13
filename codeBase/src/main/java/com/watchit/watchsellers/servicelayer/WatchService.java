@@ -47,7 +47,7 @@ public class WatchService {
 
         logger.info("Getting all watches");
         List<Watch> allWatches = watchRepository.findAll();
-        logger.info("All watches : {}", allWatches);
+//        logger.info("All watches : {}", allWatches);
         return WatchMapper.INSTANCE.watchToDTOs(allWatches);
 
 

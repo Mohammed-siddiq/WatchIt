@@ -14,7 +14,7 @@ public class WatchDto {
 
     private String name;
 
-    private boolean limited;
+    private String limited;
 
     private String caseMaterial;
 
@@ -37,6 +37,8 @@ public class WatchDto {
     private String imageLink;
 
     private String imagePath;
+
+
 
 
 //    public String getImagePath() {

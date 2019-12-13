@@ -126,18 +126,38 @@ public class PredictionService {
 
         //findAllByCaseShapeOrCaseBackOrDialIndexesOrDialColorOrMovementTime
 
+        for (AnnotationPayload payload :
+                predictedResponse.getPayloadList()) {
 
-        watchDto.setCaseShape(predictedResponse.getPayload(3).getDisplayName());
+            String name = payload.getDisplayName().split("-")[0].trim();
 
-        watchDto.setDialColor(predictedResponse.getPayload(11).getDisplayName().split("-")[1].trim());
+            switch (name) {
+                case "case material":
+                    watchDto.setCaseMaterial(payload.getDisplayName().split("-")[1]);
+                    break;
+                case "dial color":
+                    watchDto.setDialColor(payload.getDisplayName().split("-")[1]);
+                    break;
+                case "dial hands":
+                    watchDto.setDialHands(payload.getDisplayName().split("-")[1]);
+                    break;
+            }
 
-        watchDto.setDialIndexes(predictedResponse.getPayload(5).getDisplayName());
+        }
 
-        watchDto.setDialHands(predictedResponse.getPayload(6).getDisplayName().split("-")[1].trim());
 
-        watchDto.setMovementTime(predictedResponse.getPayload(4).getDisplayName());
 
-        watchDto.setCaseMaterial(predictedResponse.getPayload(6).getDisplayName().split("-")[1].trim());
+        watchDto.setCaseShape(predictedResponse.getPayload(5).getDisplayName());
+
+//        watchDto.setDialColor(predictedResponse.getPayload(1).getDisplayName().split("-")[1].trim());
+//
+//        watchDto.setDialIndexes(predictedResponse.getPayload(5).getDisplayName());
+//
+//        watchDto.setDialHands(predictedResponse.getPayload(4).getDisplayName().split("-")[1].trim());
+//
+//        watchDto.setMovementTime(predictedResponse.getPayload(6).getDisplayName());
+//
+//        watchDto.setCaseMaterial(predictedResponse.getPayload(6).getDisplayName());
 
         return watchDto;
     }
